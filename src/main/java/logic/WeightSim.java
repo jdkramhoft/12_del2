@@ -1,5 +1,6 @@
 package logic;
 
+import dal.DatabaseImplementation;
 import dal.IWeightDAO;
 
 import java.io.BufferedReader;
@@ -9,6 +10,8 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class WeightSim  implements ILogic{
+    DatabaseImplementation DBConnection = new DatabaseImplementation();
+
     @Override
     public void work() throws IOException {
         String sentence;
@@ -34,7 +37,22 @@ public class WeightSim  implements ILogic{
 
     @Override
     public String userAuthorization(int id) {
-        return null;
+        String returnMsg="";
+        if(id > 10 && id < 100){
+            String name=""; //= DBConnection."getUserName";
+            //replace true with check for found id
+            if(true){
+                returnMsg = name;
+            }
+            else{
+             return returnMsg = "User not found";
+            }
+
+        }else{
+            returnMsg = "Please insert userid between 11-99";
+            return returnMsg;
+        }
+        return returnMsg;
     }
 
     @Override
