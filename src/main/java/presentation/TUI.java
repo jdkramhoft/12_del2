@@ -20,31 +20,31 @@ public class TUI implements IPresentation {
     }
 
 
-    public  String readLine(){
+    public String readLine() {
         getOperatorNumber();
         return keyboard.nextLine();
     }
 
     public void getOperatorNumber() {
         Integer.parseInt(readLine());
-            //operatør nummer
-            System.out.println("//PlEaSe WrItE yOuR oPeRaToR nUmBeR:");
-            dtoset.setOperatorId(Integer.parseInt(readLine()));
-            //operatørs navn findes i databasen
-            // Navnet vises på vægten.
-            System.out.println("iS tHiS nAmE cOrReCt?:");
-            if (readLine() == "no"){
-                System.out.println("!!WRONG!! pLeAsE tYpE iN a VaLiD nAmE:");
-            } else {
-                //gå videre i programmet
-                getBatchNumber();
-            }
+        //operatør nummer
+        System.out.println("//PlEaSe WrItE yOuR oPeRaToR nUmBeR:");
+        dtoset.setOperatorId(Integer.parseInt(readLine()));
+        //operatørs navn findes i databasen
+        // Navnet vises på vægten.
+        System.out.println("iS tHiS nAmE cOrReCt?:");
+        if (readLine() == "no") {
+            System.out.println("!!WRONG!! pLeAsE tYpE iN a VaLiD nAmE:");
+        } else {
+            //gå videre i programmet
+            getBatchNumber();
+        }
     }
 
-    public void getBatchNumber(){
+    public void getBatchNumber() {
         System.out.println("Please type in your batch number between 1000 and 9999");
         Integer.parseInt(readLine());
-        if (Integer.parseInt(readLine()) < 1000 && Integer.parseInt(readLine()) < 9999){
+        if (Integer.parseInt(readLine()) < 1000 && Integer.parseInt(readLine()) < 9999) {
             System.out.println("Please write a reasonable number between 1000 and 9999");
         } else {
             instructions();
@@ -67,7 +67,7 @@ public class TUI implements IPresentation {
         placeContainer();
     }
 
-    public void placeContainer(){
+    public void placeContainer() {
         System.out.println("Please place an empty container. \n Please type 'OK' when done.");
         Integer.parseInt(readLine());
         if (readLine() != "OK" && readLine() != "ok" && readLine() != "Ok") {
@@ -92,7 +92,7 @@ public class TUI implements IPresentation {
         nettoWeight();
     }
 
-    public void nettoWeight(){
+    public void nettoWeight() {
         System.out.println("Now let's play a game...");
         TimeUnit.SECONDS.toSeconds(2);
         System.out.println("Please place a container with a item of your choice inside it. \n Please type 'OK' when finished");
@@ -115,6 +115,7 @@ public class TUI implements IPresentation {
 
         }
     }
+}
 
 
 
