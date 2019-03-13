@@ -49,6 +49,6 @@ public class WeightSim  implements ILogic{
 
     @Override
     public boolean validateResult(double netto, double brutto) {
-        return false;
+        return (Math.abs(netto/brutto - 1) <= ERROR_MARGIN);
     }
 }

@@ -5,7 +5,7 @@ import dal.IWeightDAO;
 import java.io.IOException;
 
 public interface ILogic {
-    final static double errorMargin = 0.01;
+    final static double ERROR_MARGIN = 0.0001;
     void work() throws IOException;
     void setDAO(IWeightDAO dao);
     String userAuthorization(int id); //returns username to display on scale, 11-99
