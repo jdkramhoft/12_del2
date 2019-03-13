@@ -2,6 +2,8 @@ package logic;
 
 import dal.DatabaseImplementation;
 import dal.IWeightDAO;
+import dto.BatchDTO;
+import dto.UserDTO;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -36,8 +38,8 @@ public class WeightSim  implements ILogic{
     }
 
     @Override
-    public String userAuthorization(int id) {
-        String returnMsg="";
+    public UserDTO getUser(int id) {
+        // UserDTO userDTO = getUser(id); //null if user not found in DB
         if(id > 10 && id < 100){
             String name=""; //= DBConnection."getUserName";
             //replace true with check for found id
@@ -56,7 +58,8 @@ public class WeightSim  implements ILogic{
     }
 
     @Override
-    public String enterBatchNumber(int batchNumber) {
+    public BatchDTO enterBatchNumber(int batchNumber) {
+        //BatchDTO batchDTO = getBatch(batchNumber); //null if batch not found in DB
         return null;
     }
 

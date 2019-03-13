@@ -37,13 +37,13 @@ public class WeightSimTest {
 
     @Test
     public void shouldAuthorizeUser(){
-        String name = sim.userAuthorization(validID);
+        String name = sim.getUser(validID);
         assertEquals(opName, name);
     }
 
     @Test
     public void shouldNotAuthorizeUser(){
-        String name = sim.userAuthorization(invalidID);
+        String name = sim.getUser(invalidID);
         assertNull(name);
     }
 
