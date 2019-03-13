@@ -8,13 +8,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.net.Socket;
+
 import static org.junit.Assert.*;
 
 public class WeightSimTest {
 
+    private static final int invalidBatchID = -1;
+    private static final int invalidUserID = -1;
+
     private ILogic sim;
     private IWeightDAO dao;
-    private int invalidID = 1;
     private BatchDTO batch;
     private UserDTO operator;
 
@@ -40,19 +45,38 @@ public class WeightSimTest {
         this.batch = null;
         this.operator = null;
     }
-/*
+
     @Test
     public void shouldGetUser(){
-        UserDTO user = sim.userAuthorization(operator.getId());
+        UserDTO user = sim.getUser(operator.getId());
         assertEquals(operator, user);
     }
 
     @Test
-    public void shouldReturnNull(){
-        UserDTO user = sim.userAuthorization(invalidID);
+    public void shouldReturnNullUser() {
+        UserDTO user = sim.getUser(invalidUserID);
         assertNull(user);
     }
-*/
 
+    @Test
+    public void shouldEstablishConnection() throws IOException {
+        try(Socket socket = sim.EstablishConnection()){
+            assertNotNull(socket);
+        }
+    }
+
+    @Test
+    public void shouldGetBatch(){
+        BatchDTO receivedBatch = sim.enterBatchNumber(batch.getId());
+        assertEquals(batch, receivedBatch);
+    }
+
+    @Test
+    public void shouldReturnNullBatch(){
+        BatchDTO receivedBatch = sim.enterBatchNumber(batch.getId());
+        assertNull(receivedBatch);
+    }
+
+    //TODO: MORE!
 
 }
