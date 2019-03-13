@@ -10,8 +10,10 @@ import java.util.concurrent.TimeUnit;
 public class TUI implements IPresentation {
 
     private IController controller;
+    //TODO: Does not need a DAO in current implementation
     private IWeightDAO daoset;
     private WeightDTO dtoset = new WeightDTO();
+    //TODO: Should probably be private
     static Scanner keyboard = new Scanner(System.in);
 
     @Override
@@ -28,12 +30,15 @@ public class TUI implements IPresentation {
     public void getOperatorNumber() {
         Integer.parseInt(readLine());
         //operatør nummer
+        //                    TODO: My eyes
         System.out.println("//PlEaSe WrItE yOuR oPeRaToR nUmBeR:");
         dtoset.setOperatorId(Integer.parseInt(readLine()));
         //operatørs navn findes i databasen
         // Navnet vises på vægten.
         System.out.println("iS tHiS nAmE cOrReCt?:");
+        //TODO: Don't compare strings with ==
         if (readLine() == "no") {
+            //TODO: Do you mean type in a valid ID?
             System.out.println("!!WRONG!! pLeAsE tYpE iN a VaLiD nAmE:");
         } else {
             //gå videre i programmet
@@ -41,6 +46,7 @@ public class TUI implements IPresentation {
         }
     }
 
+    //TODO: No logic in presentation implementation, can not have number 1000 and 9999 present here.
     public void getBatchNumber() {
         System.out.println("Please type in your batch number between 1000 and 9999");
         Integer.parseInt(readLine());
@@ -51,9 +57,12 @@ public class TUI implements IPresentation {
         }
     }
 
+
     public void instructions() {
         System.out.println("Please any kind of objects off the weight \n Type 'OK' when you're done");
+        //TODO: vvvvvvvv The truth is yellow
         Integer.parseInt(readLine());
+        //TODO: No == or != operators on string comparisons
         if (readLine() != "OK" && readLine() != "ok" && readLine() != "Ok") {
             System.out.println("Please take your business somewhere else, thank you for using 'hold 12' weight problem \n Have a nice day, byw bish");
         } else {
