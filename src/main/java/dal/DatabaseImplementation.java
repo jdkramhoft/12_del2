@@ -50,7 +50,7 @@ public class DatabaseImplementation implements IWeightDAO {
         String name = user.getName();
 
         try (Connection c = createConnection()){
-            PreparedStatement statement = c.prepareStatement("INSERT INTO Users(?,?)");
+            PreparedStatement statement = c.prepareStatement("INSERT INTO Users(userId,userName) VALUES (?,?)");
             statement.setInt(1, id);
             statement.setString(2, name);
             statement.executeQuery();
@@ -83,7 +83,7 @@ public class DatabaseImplementation implements IWeightDAO {
         double batchWeight = batch.getWeight();
 
         try (Connection c = createConnection()){
-            PreparedStatement statement = c.prepareStatement("INSERT INTO Batches (?,?,?,?)");
+            PreparedStatement statement = c.prepareStatement("INSERT INTO Batches (batchId, batchName, userId, batchWeight) VALUES (?,?,?,?)");
             statement.setInt(1, batchId);
             statement.setString(2, batchName);
             statement.setInt(3, userId);
@@ -135,7 +135,7 @@ public class DatabaseImplementation implements IWeightDAO {
         double batchWeight = batch.getWeight();
 
         try (Connection c = createConnection()){
-            PreparedStatement statement = c.prepareStatement("UPDATE Batches SET(batchId = ?, batchName = ?, userId = ?, nettoWeight = ?)");
+            PreparedStatement statement = c.prepareStatement("UPDATE Batches SET (batchId = ?, batchName = ?, userId = ?, nettoWeight = ?)");
             statement.setInt(1, batchId);
             statement.setString(2, batchName);
             statement.setInt(3, userId);
