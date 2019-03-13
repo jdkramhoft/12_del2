@@ -10,11 +10,8 @@ import java.util.concurrent.TimeUnit;
 public class TUI implements IPresentation {
 
     private IController controller;
-    //TODO: Does not need a DAO in current implementation
-    private IWeightDAO daoset;
     private WeightDTO dtoset = new WeightDTO();
-    //TODO: Should probably be private
-    static Scanner keyboard = new Scanner(System.in);
+    private static Scanner keyboard = new Scanner(System.in);
 
     @Override
     public void setController(IController controller) {
@@ -22,24 +19,21 @@ public class TUI implements IPresentation {
     }
 
 
-    public String readLine() {
+    private String readLine() {
         getOperatorNumber();
         return keyboard.nextLine();
     }
 
-    public void getOperatorNumber() {
-        Integer.parseInt(readLine());
+    private void getOperatorNumber() {
+        readLine();
         //operatør nummer
-        //                    TODO: My eyes
         System.out.println("//PlEaSe WrItE yOuR oPeRaToR nUmBeR:");
         dtoset.setOperatorId(Integer.parseInt(readLine()));
         //operatørs navn findes i databasen
         // Navnet vises på vægten.
         System.out.println("iS tHiS nAmE cOrReCt?:");
-        //TODO: Don't compare strings with ==
-        if (readLine() == "no") {
-            //TODO: Do you mean type in a valid ID?
-            System.out.println("!!WRONG!! pLeAsE tYpE iN a VaLiD nAmE:");
+        if (readLine().equals("no")) {
+            System.out.println("!!WRONG!! pLeAsE tYpE iN a VaLiD nUmBeR:");
         } else {
             //gå videre i programmet
             getBatchNumber();
@@ -47,9 +41,9 @@ public class TUI implements IPresentation {
     }
 
     //TODO: No logic in presentation implementation, can not have number 1000 and 9999 present here.
-    public void getBatchNumber() {
+    private void getBatchNumber() {
         System.out.println("Please type in your batch number between 1000 and 9999");
-        Integer.parseInt(readLine());
+        readLine();
         if (Integer.parseInt(readLine()) < 1000 && Integer.parseInt(readLine()) < 9999) {
             System.out.println("Please write a reasonable number between 1000 and 9999");
         } else {
@@ -58,15 +52,11 @@ public class TUI implements IPresentation {
     }
 
 
-    public void instructions() {
+    private void instructions() {
         System.out.println("Please any kind of objects off the weight \n Type 'OK' when you're done");
-        //TODO: vvvvvvvv The truth is yellow
-        Integer.parseInt(readLine());
-        //TODO: No == or != operators on string comparisons
-        if (readLine() != "OK" && readLine() != "ok" && readLine() != "Ok") {
+        readLine();
+        if (!(readLine().equals("OK")) && !(readLine().equals("ok")) && !(readLine().equals("Ok"))) {
             System.out.println("Please take your business somewhere else, thank you for using 'hold 12' weight problem \n Have a nice day, byw bish");
-        } else {
-
         }
 
         //metode til at få af vide hvis der stadigvæk er ting på vægten
@@ -76,13 +66,11 @@ public class TUI implements IPresentation {
         placeContainer();
     }
 
-    public void placeContainer() {
+    private void placeContainer() {
         System.out.println("Please place an empty container. \n Please type 'OK' when done.");
-        Integer.parseInt(readLine());
-        if (readLine() != "OK" && readLine() != "ok" && readLine() != "Ok") {
+        readLine();
+        if (!(readLine().equals("OK")) && !(readLine().equals("ok")) && !(readLine().equals("Ok"))) {
             System.out.println("Please take your business somewhere else, thank you for using 'hold 12' weight problem \n Have a nice day, bye bish");
-        } else {
-
         }
         //hvis vægten viser tal - brug if else statement med responds
         //vægten registeres
@@ -101,15 +89,13 @@ public class TUI implements IPresentation {
         nettoWeight();
     }
 
-    public void nettoWeight() {
+    private void nettoWeight() {
         System.out.println("Now let's play a game...");
         TimeUnit.SECONDS.toSeconds(2);
         System.out.println("Please place a container with a item of your choice inside it. \n Please type 'OK' when finished");
-        Integer.parseInt(readLine());
-        if (readLine() != "OK" && readLine() != "ok" && readLine() != "Ok") {
+        readLine();
+        if (!(readLine().equals("OK")) && !(readLine().equals("ok")) && !(readLine().equals("Ok"))) {
             System.out.println("Please take your business somewhere else, thank you for using 'hold 12' weight problem \n Have a nice day, bye bish");
-        } else {
-
         }
 
         //hvis vægten viser tal - brug if else statement med responds
@@ -117,11 +103,9 @@ public class TUI implements IPresentation {
 
         //vægten nulstilles
         System.out.println("Are you OK with the weight resetting? Then please type 'YES'");
-        Integer.parseInt(readLine());
-        if (readLine() != "YES" && readLine() != "yes" && readLine() != "Yes") {
+        readLine();
+        if (readLine().equals("YES") && readLine().equals("yes") && readLine().equals("Yes")) {
             System.out.println("Please take your business somewhere else, thank you for using 'hold 12' weight problem \n Have a nice day, bye bish");
-        } else {
-
         }
     }
 }
