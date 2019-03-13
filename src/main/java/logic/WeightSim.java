@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class WeightSim implements ILogic{
-    IWeightDAO dao;
+    private IWeightDAO dao;
 
     @Override
     public Socket EstablishConnection() throws IOException {
