@@ -1,7 +1,9 @@
 package presentation;
 
+import logic.ILogic;
+
 public interface IPresentation {
 
-    void setController(IController controller);
+    void setController(ILogic controller);
 
 }

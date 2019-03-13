@@ -1,12 +1,13 @@
 package presentation;
 
+import logic.ILogic;
+
 public class TUI implements IPresentation {
 
-    private IController controller;
+    private ILogic controller;
 
     @Override
-    public void setController(IController controller) {
+    public void setController(ILogic controller) {
         this.controller = controller;
     }
-
 }

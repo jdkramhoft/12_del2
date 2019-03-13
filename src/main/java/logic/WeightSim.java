@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class Logic  implements ILogic{
+public class WeightSim  implements ILogic{
     @Override
     public void work() throws IOException {
         String sentence;
@@ -40,11 +40,6 @@ public class Logic  implements ILogic{
     @Override
     public String enterBatchNumber(int batchNumber) {
         return null;
-    }
-
-    @Override
-    public void enterWeight(double weight) {
-
     }
 
     @Override
