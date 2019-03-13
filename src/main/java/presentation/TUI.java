@@ -1,7 +1,5 @@
 package presentation;
 
-import logic.IController;
-
 public class TUI implements IPresentation {
 
     private IController controller;

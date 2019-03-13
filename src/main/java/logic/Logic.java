@@ -8,15 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class SimController implements IController {
-
-    private IWeightDAO dao;
-
+public class Logic  implements ILogic{
     @Override
-    public void setDAO(IWeightDAO dao) {
-        this.dao = dao;
-    }
-
     public void work() throws IOException {
         String sentence;
         String modifiedSentence;
@@ -34,6 +27,33 @@ public class SimController implements IController {
         clientSocket.close();
     }
 
+    @Override
+    public void setDAO(IWeightDAO dao) {
 
+    }
 
+    @Override
+    public String userAuthorization(int id) {
+        return null;
+    }
+
+    @Override
+    public String enterBatchNumber(int batchNumber) {
+        return null;
+    }
+
+    @Override
+    public void enterWeight(double weight) {
+
+    }
+
+    @Override
+    public int getWeight() {
+        return 0;
+    }
+
+    @Override
+    public boolean validateResult(double netto, double brutto) {
+        return false;
+    }
 }
