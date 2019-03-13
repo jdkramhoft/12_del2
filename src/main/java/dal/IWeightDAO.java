@@ -1,14 +1,18 @@
 package dal;
 
+import dto.BatchDTO;
+import dto.UserDTO;
+
 public interface IWeightDAO {
 
-    String getUserName(int userId) throws DALException;
-    void createUser(int id, String name) throws DALException;
+    UserDTO getUser(int userId) throws DALException;
+    void createUser(UserDTO user) throws DALException;
     void deleteUser(int id) throws DALException;
-    void createBatch(int batchId, int userId, String batchName, int batchWeight) throws DALException;
+    void createBatch(BatchDTO batch) throws DALException;
     void deleteBatch(int id) throws DALException;
-    void updateUser(int id, String name) throws DALException;
-    void updateBatch(int batchId, int userId, String batchName, int batchWeight)throws DALException;
+    void updateUser(UserDTO user) throws DALException;
+    void updateBatch(BatchDTO batch)throws DALException;
+    BatchDTO getBatch(int id) throws  DALException;
 
     public class DALException extends Exception {
 

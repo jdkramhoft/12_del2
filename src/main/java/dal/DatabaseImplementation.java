@@ -1,5 +1,8 @@
 package dal;
 
+import dto.BatchDTO;
+import dto.UserDTO;
+
 import java.sql.*;
 
 public class DatabaseImplementation implements IWeightDAO {
@@ -10,13 +13,14 @@ public class DatabaseImplementation implements IWeightDAO {
     }
 
     @Override
-    public String getUserName(int userId) throws DALException{
+    public UserDTO getUser(int userId) throws DALException{
 
         try (Connection c = createConnection()){
-            PreparedStatement statement = c.prepareStatement("SELECT userName FROM Users WHERE userId = ?");
+            PreparedStatement statement = c.prepareStatement("SELECT * FROM Users WHERE userId = ?");
             statement.setInt(1, userId);
             ResultSet rs = statement.executeQuery();
-            return rs.getString("userName");
+            UserDTO user = new UserDTO(rs.getInt("userId"), rs.getString("userName"));
+            return user;
 
         } catch (SQLException e) {
             throw new DALException(e.getMessage());
@@ -24,7 +28,26 @@ public class DatabaseImplementation implements IWeightDAO {
     }
 
     @Override
-    public void createUser(int id, String name) throws DALException{
+    public BatchDTO getBatch(int id) throws DALException{
+
+        try (Connection c = createConnection()){
+            PreparedStatement statement = c.prepareStatement("SELECT * FROM Batches WHERE batchId = ?");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            BatchDTO batch = new BatchDTO(rs.getInt("batchId"), rs.getString("batchName"), rs.getInt("userId"), rs.getDouble("nettoWeight"));
+            return batch;
+
+        } catch (SQLException e) {
+            throw new DALException(e.getMessage());
+        }
+
+    }
+
+    @Override
+    public void createUser(UserDTO user) throws DALException{
+
+        int id = user.getId();
+        String name = user.getName();
 
         try (Connection c = createConnection()){
             PreparedStatement statement = c.prepareStatement("INSERT INTO Users(?,?)");
@@ -52,14 +75,19 @@ public class DatabaseImplementation implements IWeightDAO {
     }
 
     @Override
-    public void createBatch(int batchId, int userId, String batchName, int batchWeight) throws DALException{
+    public void createBatch(BatchDTO batch) throws DALException{
+
+        int batchId = batch.getId();
+        String batchName = batch.getName();
+        int userId = batch.getUserID();
+        double batchWeight = batch.getWeight();
 
         try (Connection c = createConnection()){
             PreparedStatement statement = c.prepareStatement("INSERT INTO Batches (?,?,?,?)");
             statement.setInt(1, batchId);
             statement.setString(2, batchName);
             statement.setInt(3, userId);
-            statement.setInt(4, batchWeight);
+            statement.setDouble(4, batchWeight);
             statement.executeQuery();
 
         } catch (SQLException e) {
@@ -82,7 +110,10 @@ public class DatabaseImplementation implements IWeightDAO {
     }
 
     @Override
-    public void updateUser(int id, String name) throws DALException{
+    public void updateUser(UserDTO user) throws DALException{
+
+        int id = user.getId();
+        String name = user.getName();
 
         try (Connection c = createConnection()){
             PreparedStatement statement = c.prepareStatement("UPDATE Users SET (userId = ?, userName = ?)");
@@ -96,14 +127,19 @@ public class DatabaseImplementation implements IWeightDAO {
     }
 
     @Override
-    public void updateBatch(int batchId, int userId, String batchName, int batchWeight) throws DALException{
+    public void updateBatch(BatchDTO batch) throws DALException{
+
+        int batchId = batch.getId();
+        String batchName = batch.getName();
+        int userId = batch.getUserID();
+        double batchWeight = batch.getWeight();
 
         try (Connection c = createConnection()){
             PreparedStatement statement = c.prepareStatement("UPDATE Batches SET(batchId = ?, batchName = ?, userId = ?, nettoWeight = ?)");
             statement.setInt(1, batchId);
             statement.setString(2, batchName);
             statement.setInt(3, userId);
-            statement.setInt(4, batchWeight);
+            statement.setDouble(4, batchWeight);
             statement.executeUpdate();
 
         } catch (SQLException e) {
