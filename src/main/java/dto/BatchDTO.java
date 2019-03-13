@@ -2,15 +2,16 @@ package dto;
 
 public class BatchDTO {
 
-    private static final int MIN = 11;
-    private static final int MAX = 99;
-
+    private double weight;
+    private int userID;
     private String name;
     private int id;
 
-    public BatchDTO(int id, String name){
+    public BatchDTO(int id, String name, int userID, double weight){
         this.id = id;
         this.name = name;
+        this.userID = userID;
+        this.weight = weight;
     }
 
     public BatchDTO(){}
@@ -32,9 +33,19 @@ public class BatchDTO {
         this.id = id;
     }
 
-    public boolean isValid(){
-        boolean idIsValid = (id <= MAX && id >= MIN);
-        boolean nameIsValid = (name != null && name.length() > 0);
-        return idIsValid && nameIsValid;
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }
