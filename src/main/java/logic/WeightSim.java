@@ -1,6 +1,5 @@
 package logic;
 
-import dal.DatabaseImplementation;
 import dal.IWeightDAO;
 import dto.BatchDTO;
 import dto.UserDTO;
@@ -9,7 +8,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class WeightSim implements ILogic{
-    DatabaseImplementation DBConnection = new DatabaseImplementation();
+    private IWeightDAO dao;
 
     @Override
     public Socket EstablishConnection() throws IOException {
@@ -20,33 +19,20 @@ public class WeightSim implements ILogic{
 
     @Override
     public void setDAO(IWeightDAO dao) {
-
+        this.dao = dao;
     }
 
     @Override
     public UserDTO getUser(int id) {
-        // UserDTO userDTO = getUser(id); //null if user not found in DB
-        if(id > 10 && id < 100){
-            String name=""; //= DBConnection."getUserName";
-            //replace true with check for found id
-            if(true){
-                returnMsg = name;
-            }
-            else{
-             return returnMsg = "User not found";
-            }
+        UserDTO user = dao.getUser(id); //null if user not found in DB
 
-        }else{
-            returnMsg = "Please insert userid between 11-99";
-            return returnMsg;
-        }
-        return returnMsg;
+        return user;
     }
 
     @Override
     public BatchDTO enterBatchNumber(int batchNumber) {
-        //BatchDTO batchDTO = getBatch(batchNumber); //null if batch not found in DB
-        return null;
+        BatchDTO batch = dao.getBatch(batchNumber); //null if batch not found in DB
+        return batch;
     }
 
     @Override
